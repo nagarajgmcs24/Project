@@ -16,6 +16,7 @@ A modern, full-stack web application that enables citizens to report community p
 ## Tech Stack
 
 ### Frontend
+
 - **React 18** with TypeScript
 - **React Router 6** for navigation
 - **Tailwind CSS 3** for styling
@@ -23,11 +24,13 @@ A modern, full-stack web application that enables citizens to report community p
 - **Vite** for fast development and building
 
 ### Backend
+
 - **Express.js 5** with TypeScript
 - **Node.js** runtime
 - **Mongoose** for MongoDB ODM (optional, included for production)
 
 ### Database
+
 - **MongoDB** (optional, for production)
 - **localStorage** (for demo/development)
 
@@ -74,18 +77,20 @@ A modern, full-stack web application that enables citizens to report community p
 
 ### Prerequisites
 
-- Node.js 16+ 
+- Node.js 16+
 - npm or pnpm
 - MongoDB (for production, optional for development)
 
 ### Installation
 
 1. **Install dependencies**
+
    ```bash
    pnpm install
    ```
 
 2. **Start development server**
+
    ```bash
    pnpm dev
    ```
@@ -147,11 +152,13 @@ The application includes 10 pre-configured Bengaluru wards:
 ## API Endpoints
 
 ### Authentication
+
 - `POST /api/auth/login` - User login
 - `POST /api/auth/signup` - User registration
 - `POST /api/auth/logout` - User logout
 
 ### Reports
+
 - `POST /api/reports` - Create new report
 - `GET /api/reports` - Get reports (with filtering)
 - `GET /api/reports/:id` - Get specific report
@@ -160,6 +167,7 @@ The application includes 10 pre-configured Bengaluru wards:
 - `DELETE /api/reports/:id` - Delete a report
 
 ### Wards
+
 - `GET /api/wards` - Get all wards
 - `GET /api/wards/:id` - Get specific ward
 
@@ -181,32 +189,38 @@ To use MongoDB in production:
    - Cloud: https://www.mongodb.com/cloud/atlas
 
 2. **Update server/index.ts to connect MongoDB**:
-   ```typescript
-   import mongoose from 'mongoose';
 
-   mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/fixmyward');
+   ```typescript
+   import mongoose from "mongoose";
+
+   mongoose.connect(
+     process.env.MONGODB_URI || "mongodb://localhost:27017/fixmyward",
+   );
    ```
 
 3. **Update .env file**:
+
    ```env
    MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/fixmyward
    ```
 
 4. **Seed initial ward data** (optional):
    ```typescript
-   import { Ward } from './models/Ward';
+   import { Ward } from "./models/Ward";
    // Use the bengaluruWards data from server/routes/wards.ts
    ```
 
 ## Image Verification
 
 The application includes a placeholder for AI-based image verification to detect:
+
 - Fake or manipulated images
 - Irrelevant content
 - Image quality issues
 - Content relevance to the reported category
 
 To enable advanced verification, integrate with:
+
 - **Google Cloud Vision API** for image analysis
 - **AWS Rekognition** for object detection
 - **Azure Computer Vision** for content analysis
@@ -250,31 +264,38 @@ For production deployment:
 ## Troubleshooting
 
 ### Development Server Issues
+
 - Clear node_modules and reinstall: `rm -rf node_modules pnpm-lock.yaml && pnpm install`
 - Clear Vite cache: `rm -rf .vite`
 
 ### Build Issues
+
 - Check Node version: `node --version` (should be 16+)
 - Clear build cache: `rm -rf dist`
 
 ### Styling Issues
+
 - Rebuild Tailwind CSS: The build process should handle this automatically
 - Check `tailwind.config.ts` for proper content paths
 
 ## Deployment Options
 
 ### Netlify
+
 1. Connect your GitHub repository
 2. Set build command: `pnpm build`
 3. Set publish directory: `dist`
 
 ### Vercel
+
 1. Import your repository
 2. Vercel auto-detects the build settings
 3. Deploy automatically
 
 ### Docker
+
 Create a `Dockerfile` for containerization:
+
 ```dockerfile
 FROM node:18-alpine
 WORKDIR /app
@@ -297,6 +318,7 @@ This project is open source and available under the MIT License.
 ## Contact & Support
 
 For support, issues, or questions:
+
 - Create an issue on GitHub
 - Contact the development team
 

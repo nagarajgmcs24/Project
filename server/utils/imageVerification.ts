@@ -18,7 +18,7 @@ interface VerificationResult {
  */
 export async function verifyImageRelevance(
   imageUrl: string,
-  category: string
+  category: string,
 ): Promise<VerificationResult> {
   try {
     // In a production environment, you would:
@@ -38,7 +38,7 @@ export async function verifyImageRelevance(
     if (!imageUrl || imageUrl.trim().length === 0) {
       result.isValid = false;
       result.confidence = 0;
-      result.issues.push('Image URL is empty or invalid');
+      result.issues.push("Image URL is empty or invalid");
       return result;
     }
 
@@ -78,10 +78,10 @@ export async function verifyImageRelevance(
     return {
       isValid: false,
       confidence: 0,
-      issues: ['Error during image verification'],
+      issues: ["Error during image verification"],
       recommendations: [
-        'Please upload a clear photo of the problem',
-        'Ensure the image is taken in good lighting',
+        "Please upload a clear photo of the problem",
+        "Ensure the image is taken in good lighting",
       ],
     };
   }
@@ -90,29 +90,30 @@ export async function verifyImageRelevance(
 /**
  * Validates the image based on the reported category
  */
-function validateByCategory(
-  category: string
-): { isValid: boolean; issues: string[] } {
+function validateByCategory(category: string): {
+  isValid: boolean;
+  issues: string[];
+} {
   const issues: string[] = [];
   let isValid = true;
 
   switch (category) {
-    case 'road-damage':
+    case "road-damage":
       // Check for road/pavement visibility
       break;
-    case 'water-problem':
+    case "water-problem":
       // Check for water-related features
       break;
-    case 'footpath':
+    case "footpath":
       // Check for footpath visibility
       break;
-    case 'drainage':
+    case "drainage":
       // Check for drainage features
       break;
-    case 'street-light':
+    case "street-light":
       // Check for street light visibility
       break;
-    case 'garbage':
+    case "garbage":
       // Check for garbage/debris
       break;
     default:
@@ -177,7 +178,7 @@ export async function detectFakeImage(imageUrl: string): Promise<{
       return {
         isFake: true,
         confidence: 1.0,
-        indicators: ['No image provided'],
+        indicators: ["No image provided"],
       };
     }
 
@@ -190,7 +191,7 @@ export async function detectFakeImage(imageUrl: string): Promise<{
     return {
       isFake: false,
       confidence: 0,
-      indicators: ['Verification error'],
+      indicators: ["Verification error"],
     };
   }
 }
@@ -201,7 +202,7 @@ export async function detectFakeImage(imageUrl: string): Promise<{
 export async function generateVerificationReport(
   imageUrl: string,
   category: string,
-  description: string
+  description: string,
 ): Promise<{
   isApproved: boolean;
   verificationScore: number;
@@ -214,7 +215,8 @@ export async function generateVerificationReport(
     detectFakeImage(imageUrl),
   ]);
 
-  const verificationScore = (relevanceResult.confidence + (1 - fakeIndicators.confidence)) / 2;
+  const verificationScore =
+    (relevanceResult.confidence + (1 - fakeIndicators.confidence)) / 2;
 
   const isApproved =
     relevanceResult.isValid &&
@@ -224,7 +226,7 @@ export async function generateVerificationReport(
   const recommendations = [
     ...relevanceResult.recommendations,
     ...(fakeIndicators.isFake
-      ? ['Image appears to be manipulated. Please provide an original photo.']
+      ? ["Image appears to be manipulated. Please provide an original photo."]
       : []),
   ];
 

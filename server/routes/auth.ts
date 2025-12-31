@@ -52,7 +52,16 @@ export const handleLogin: RequestHandler = (req, res) => {
 
 export const handleSignup: RequestHandler = (req, res) => {
   try {
-    const { name, username, email, password, confirmPassword, phone, ward, role } = req.body;
+    const {
+      name,
+      username,
+      email,
+      password,
+      confirmPassword,
+      phone,
+      ward,
+      role,
+    } = req.body;
 
     // Validation
     if (!name || !username || !email || !password || !phone || !ward || !role) {
@@ -64,7 +73,9 @@ export const handleSignup: RequestHandler = (req, res) => {
     }
 
     // Check if user already exists
-    const existingUser = users.find((u) => u.username === username || u.email === email);
+    const existingUser = users.find(
+      (u) => u.username === username || u.email === email,
+    );
     if (existingUser) {
       return res.status(400).json({ error: "User already exists" });
     }

@@ -1,19 +1,19 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useLanguage } from '@/i18n/LanguageContext';
-import { Mail, Lock, User, MapPin, Globe } from 'lucide-react';
-import { bengaluruWards } from '@/data/wards';
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useLanguage } from "@/i18n/LanguageContext";
+import { Mail, Lock, User, MapPin, Globe } from "lucide-react";
+import { bengaluruWards } from "@/data/wards";
 
 export default function CitizenLogin() {
   const { language, setLanguage, t } = useLanguage();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-    ward: '',
+    username: "",
+    email: "",
+    password: "",
+    ward: "",
   });
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e: any) => {
@@ -26,52 +26,52 @@ export default function CitizenLogin() {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    setError('');
+    setError("");
 
     if (!formData.username) {
-      setError(t('enterUsername'));
+      setError(t("enterUsername"));
       return;
     }
     if (!formData.email) {
-      setError(t('enterEmail'));
+      setError(t("enterEmail"));
       return;
     }
     if (!formData.password) {
-      setError(t('enterPassword'));
+      setError(t("enterPassword"));
       return;
     }
     if (!formData.ward) {
-      setError(t('selectAWard'));
+      setError(t("selectAWard"));
       return;
     }
 
     setLoading(true);
     try {
-      const response = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           username: formData.username,
           email: formData.email,
           password: formData.password,
           ward: formData.ward,
-          role: 'citizen',
+          role: "citizen",
         }),
       });
 
       if (!response.ok) {
-        throw new Error('Login failed');
+        throw new Error("Login failed");
       }
 
       const data = await response.json();
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('userId', data.userId);
-      localStorage.setItem('role', 'citizen');
-      localStorage.setItem('ward', formData.ward);
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("userId", data.userId);
+      localStorage.setItem("role", "citizen");
+      localStorage.setItem("ward", formData.ward);
 
-      navigate('/citizen-dashboard');
+      navigate("/citizen-dashboard");
     } catch (err) {
-      setError('Login failed. Please try again.');
+      setError("Login failed. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -99,8 +99,10 @@ export default function CitizenLogin() {
           <div className="inline-block bg-blue-600 p-4 rounded-full mb-4">
             <User className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">{t('citizenLogin')}</h1>
-          <p className="text-gray-600">{t('appSubtitle')}</p>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            {t("citizenLogin")}
+          </h1>
+          <p className="text-gray-600">{t("appSubtitle")}</p>
         </div>
 
         {/* Form Card */}
@@ -115,7 +117,7 @@ export default function CitizenLogin() {
             {/* Username */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                {t('username')}
+                {t("username")}
               </label>
               <div className="relative">
                 <User className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
@@ -124,7 +126,7 @@ export default function CitizenLogin() {
                   name="username"
                   value={formData.username}
                   onChange={handleChange}
-                  placeholder={t('username')}
+                  placeholder={t("username")}
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
@@ -133,7 +135,7 @@ export default function CitizenLogin() {
             {/* Email */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                {t('email')}
+                {t("email")}
               </label>
               <div className="relative">
                 <Mail className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
@@ -142,7 +144,7 @@ export default function CitizenLogin() {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  placeholder={t('email')}
+                  placeholder={t("email")}
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
@@ -151,7 +153,7 @@ export default function CitizenLogin() {
             {/* Password */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                {t('password')}
+                {t("password")}
               </label>
               <div className="relative">
                 <Lock className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
@@ -160,7 +162,7 @@ export default function CitizenLogin() {
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
-                  placeholder={t('password')}
+                  placeholder={t("password")}
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
@@ -169,7 +171,7 @@ export default function CitizenLogin() {
             {/* Ward Selection */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                {t('selectWard')}
+                {t("selectWard")}
               </label>
               <div className="relative">
                 <MapPin className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
@@ -179,7 +181,7 @@ export default function CitizenLogin() {
                   onChange={handleChange}
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
-                  <option value="">{t('selectWard')}</option>
+                  <option value="">{t("selectWard")}</option>
                   {bengaluruWards.map((ward) => (
                     <option key={ward.id} value={ward.id}>
                       {ward.name} - {ward.councillor}
@@ -195,7 +197,7 @@ export default function CitizenLogin() {
               disabled={loading}
               className="w-full bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
             >
-              {loading ? t('loading') : t('login')}
+              {loading ? t("loading") : t("login")}
             </button>
           </form>
 
@@ -214,22 +216,25 @@ export default function CitizenLogin() {
             to="/councillor-login"
             className="block w-full text-center px-4 py-2 border border-gray-300 rounded-lg text-gray-700 font-semibold hover:bg-gray-50 transition-colors"
           >
-            {t('councillorLogin')}
+            {t("councillorLogin")}
           </Link>
         </div>
 
         {/* Sign Up Link */}
         <p className="text-center text-gray-600">
-          {t('dontHaveAccount')}{' '}
-          <Link to="/signup" className="text-blue-600 font-semibold hover:underline">
-            {t('signup')}
+          {t("dontHaveAccount")}{" "}
+          <Link
+            to="/signup"
+            className="text-blue-600 font-semibold hover:underline"
+          >
+            {t("signup")}
           </Link>
         </p>
 
         {/* Back to Home */}
         <p className="text-center mt-4">
           <Link to="/" className="text-gray-500 hover:text-gray-700 text-sm">
-            {t('back')} {t('homeTitle')}
+            {t("back")} {t("homeTitle")}
           </Link>
         </p>
       </div>

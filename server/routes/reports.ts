@@ -5,9 +5,25 @@ const reports: any[] = [];
 
 export const handleCreateReport: RequestHandler = (req, res) => {
   try {
-    const { userId, wardId, title, category, description, photoUrl, userName, userPhone } = req.body;
+    const {
+      userId,
+      wardId,
+      title,
+      category,
+      description,
+      photoUrl,
+      userName,
+      userPhone,
+    } = req.body;
 
-    if (!userId || !wardId || !title || !category || !description || !photoUrl) {
+    if (
+      !userId ||
+      !wardId ||
+      !title ||
+      !category ||
+      !description ||
+      !photoUrl
+    ) {
       return res.status(400).json({ error: "Missing required fields" });
     }
 

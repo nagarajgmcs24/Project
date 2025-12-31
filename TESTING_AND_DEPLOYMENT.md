@@ -5,6 +5,7 @@
 ### Manual Testing Checklist
 
 #### Home Page
+
 - [ ] Page loads correctly
 - [ ] Language selector works (English, Hindi, Kannada)
 - [ ] Features section displays all 3 feature cards
@@ -13,6 +14,7 @@
 - [ ] "Sign Up" link navigates to signup page
 
 #### Citizen Login
+
 - [ ] Form validation works (error messages for missing fields)
 - [ ] Ward dropdown shows all 10 Bengaluru wards
 - [ ] Login button submits form correctly
@@ -20,6 +22,7 @@
 - [ ] "Login as Councillor" link works
 
 #### Councillor Login
+
 - [ ] Form validation works
 - [ ] Ward dropdown shows all 10 Bengaluru wards
 - [ ] Login button submits form correctly
@@ -27,6 +30,7 @@
 - [ ] "Login as Citizen" link works
 
 #### Sign Up Page
+
 - [ ] All form fields are present
 - [ ] Password confirmation validation works
 - [ ] Role selection (Citizen/Councillor) works
@@ -35,6 +39,7 @@
 - [ ] Successful signup redirects to appropriate dashboard
 
 #### Citizen Dashboard
+
 - [ ] Ward information displays correctly
 - [ ] Statistics show correct counts
 - [ ] "Report Issue" button opens modal
@@ -45,6 +50,7 @@
 - [ ] Logout button clears localStorage and redirects to home
 
 #### Councillor Dashboard
+
 - [ ] Ward information displays correctly
 - [ ] Statistics show correct counts
 - [ ] Tabs (Pending, Verified, All) filter reports correctly
@@ -57,6 +63,7 @@
 ### Browser Compatibility Testing
 
 Test on:
+
 - [ ] Chrome/Chromium
 - [ ] Firefox
 - [ ] Safari
@@ -73,17 +80,20 @@ Test on:
 ### Language Testing
 
 Test each language:
+
 - [ ] English (en) - All text in English
 - [ ] Hindi (hi) - All text translated to Hindi
 - [ ] Kannada (kn) - All text translated to Kannada
 
 Language persistence:
+
 - [ ] Selected language persists across page reloads
 - [ ] Language selector updates UI immediately
 
 ### Form Validation Testing
 
 #### Login Form
+
 ```javascript
 // Test cases
 - Empty username → "Please enter your username"
@@ -93,6 +103,7 @@ Language persistence:
 ```
 
 #### Signup Form
+
 ```javascript
 // Test cases
 - Empty fields → Appropriate error messages
@@ -101,6 +112,7 @@ Language persistence:
 ```
 
 #### Report Form
+
 ```javascript
 // Test cases
 - Empty title → "Please fill all fields"
@@ -156,17 +168,20 @@ curl -X POST http://localhost:5173/api/reports \
 ## Performance Testing
 
 ### Load Testing
+
 - Use tools like Apache JMeter or k6
 - Test with 100+ concurrent users
 - Monitor response times and error rates
 
 ### Lighthouse Audit
+
 ```bash
 # Run Lighthouse audit
 # In Chrome DevTools: Ctrl+Shift+J → Right-click → Inspect → Lighthouse tab
 ```
 
 Target scores:
+
 - Performance: > 80
 - Accessibility: > 90
 - Best Practices: > 90
@@ -188,6 +203,7 @@ Target scores:
 - [ ] Using Components with Known Vulnerabilities - Run `npm audit`
 
 ### Input Validation Testing
+
 ```javascript
 // Test malicious inputs
 - "<script>alert('xss')</script>"
@@ -211,12 +227,14 @@ Target scores:
 - [ ] Rollback plan documented
 
 ### Staging Deployment
+
 1. Deploy to staging environment
 2. Run full test suite
 3. Perform smoke tests
 4. Get stakeholder approval
 
 ### Production Deployment
+
 1. Deploy during low-traffic period
 2. Monitor error rates and performance
 3. Keep rollback plan ready
@@ -260,6 +278,7 @@ Target scores:
 ### Deploying to Docker
 
 1. **Create Dockerfile**
+
 ```dockerfile
 FROM node:18-alpine
 WORKDIR /app
@@ -272,11 +291,13 @@ CMD ["pnpm", "start"]
 ```
 
 2. **Build Image**
+
 ```bash
 docker build -t fixmyward:latest .
 ```
 
 3. **Run Container**
+
 ```bash
 docker run -p 3000:3000 fixmyward:latest
 ```
@@ -318,19 +339,19 @@ docker run -p 3000:3000 fixmyward:latest
 
 ```javascript
 // Server-side logging
-import winston from 'winston';
+import winston from "winston";
 
 const logger = winston.createLogger({
-  level: 'info',
+  level: "info",
   format: winston.format.json(),
   transports: [
-    new winston.transports.File({ filename: 'error.log', level: 'error' }),
-    new winston.transports.File({ filename: 'combined.log' })
-  ]
+    new winston.transports.File({ filename: "error.log", level: "error" }),
+    new winston.transports.File({ filename: "combined.log" }),
+  ],
 });
 
 // Use logger in routes
-logger.info('User login attempt', { userId, timestamp });
+logger.info("User login attempt", { userId, timestamp });
 ```
 
 ### Client-side Error Tracking
@@ -350,6 +371,7 @@ Sentry.init({
 ### Database Backups
 
 For MongoDB:
+
 ```bash
 # Backup
 mongodump --uri "mongodb+srv://user:pass@cluster.mongodb.net/fixmyward" --out ./backup
@@ -367,6 +389,7 @@ mongorestore --uri "mongodb+srv://user:pass@cluster.mongodb.net/fixmyward" ./bac
 ## Performance Optimization
 
 ### Frontend Optimization
+
 - [ ] Code splitting implemented
 - [ ] Images optimized and lazy-loaded
 - [ ] CSS minified
@@ -374,6 +397,7 @@ mongorestore --uri "mongodb+srv://user:pass@cluster.mongodb.net/fixmyward" ./bac
 - [ ] Caching headers configured
 
 ### Backend Optimization
+
 - [ ] Database indexes created
 - [ ] Query optimization done
 - [ ] Caching implemented (Redis)
@@ -394,11 +418,12 @@ If issues occur after deployment:
    - Minor issues → hotfix
 
 3. **Execute Rollback**
+
    ```bash
    # For Git-based deployments
    git revert <commit-hash>
    git push origin main
-   
+
    # For Docker
    docker run -p 3000:3000 fixmyward:previous-version
    ```
@@ -427,8 +452,8 @@ jobs:
       - uses: pnpm/action-setup@v2
       - uses: actions/setup-node@v3
         with:
-          node-version: '18'
-          cache: 'pnpm'
+          node-version: "18"
+          cache: "pnpm"
       - run: pnpm install
       - run: pnpm run build
       - uses: netlify/actions/cli@master
@@ -442,6 +467,7 @@ jobs:
 ## Support & Maintenance
 
 ### Regular Maintenance Tasks
+
 - [ ] Update dependencies monthly
 - [ ] Security patches within 24 hours
 - [ ] Database optimization
@@ -449,6 +475,7 @@ jobs:
 - [ ] Performance review
 
 ### Support Channels
+
 - GitHub Issues for bugs
 - Email for critical issues
 - Discord/Slack for community support

@@ -1,23 +1,23 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useLanguage } from '@/i18n/LanguageContext';
-import { Mail, Lock, User, MapPin, Globe, Phone } from 'lucide-react';
-import { bengaluruWards } from '@/data/wards';
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useLanguage } from "@/i18n/LanguageContext";
+import { Mail, Lock, User, MapPin, Globe, Phone } from "lucide-react";
+import { bengaluruWards } from "@/data/wards";
 
 export default function Signup() {
   const { language, setLanguage, t } = useLanguage();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    name: '',
-    username: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    phone: '',
-    ward: '',
-    role: 'citizen',
+    name: "",
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    phone: "",
+    ward: "",
+    role: "citizen",
   });
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e: any) => {
@@ -30,62 +30,62 @@ export default function Signup() {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    setError('');
+    setError("");
 
     if (!formData.name) {
-      setError(t('enterUsername'));
+      setError(t("enterUsername"));
       return;
     }
     if (!formData.username) {
-      setError(t('enterUsername'));
+      setError(t("enterUsername"));
       return;
     }
     if (!formData.email) {
-      setError(t('enterEmail'));
+      setError(t("enterEmail"));
       return;
     }
     if (!formData.password) {
-      setError(t('enterPassword'));
+      setError(t("enterPassword"));
       return;
     }
     if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match');
+      setError("Passwords do not match");
       return;
     }
     if (!formData.phone) {
-      setError(t('phoneNumber'));
+      setError(t("phoneNumber"));
       return;
     }
     if (!formData.ward) {
-      setError(t('selectAWard'));
+      setError(t("selectAWard"));
       return;
     }
 
     setLoading(true);
     try {
-      const response = await fetch('/api/auth/signup', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
       if (!response.ok) {
-        throw new Error('Signup failed');
+        throw new Error("Signup failed");
       }
 
       const data = await response.json();
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('userId', data.userId);
-      localStorage.setItem('role', formData.role);
-      localStorage.setItem('ward', formData.ward);
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("userId", data.userId);
+      localStorage.setItem("role", formData.role);
+      localStorage.setItem("ward", formData.ward);
 
-      if (formData.role === 'citizen') {
-        navigate('/citizen-dashboard');
+      if (formData.role === "citizen") {
+        navigate("/citizen-dashboard");
       } else {
-        navigate('/councillor-dashboard');
+        navigate("/councillor-dashboard");
       }
     } catch (err) {
-      setError('Signup failed. Please try again.');
+      setError("Signup failed. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -113,8 +113,10 @@ export default function Signup() {
           <div className="inline-block bg-purple-600 p-4 rounded-full mb-4">
             <User className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">{t('signup')}</h1>
-          <p className="text-gray-600">{t('appSubtitle')}</p>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            {t("signup")}
+          </h1>
+          <p className="text-gray-600">{t("appSubtitle")}</p>
         </div>
 
         {/* Form Card */}
@@ -129,7 +131,7 @@ export default function Signup() {
             {/* Name */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                {t('name')}
+                {t("name")}
               </label>
               <div className="relative">
                 <User className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
@@ -138,7 +140,7 @@ export default function Signup() {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  placeholder={t('name')}
+                  placeholder={t("name")}
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
                 />
               </div>
@@ -147,7 +149,7 @@ export default function Signup() {
             {/* Username */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                {t('username')}
+                {t("username")}
               </label>
               <div className="relative">
                 <User className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
@@ -156,7 +158,7 @@ export default function Signup() {
                   name="username"
                   value={formData.username}
                   onChange={handleChange}
-                  placeholder={t('username')}
+                  placeholder={t("username")}
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
                 />
               </div>
@@ -165,7 +167,7 @@ export default function Signup() {
             {/* Email */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                {t('email')}
+                {t("email")}
               </label>
               <div className="relative">
                 <Mail className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
@@ -174,7 +176,7 @@ export default function Signup() {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  placeholder={t('email')}
+                  placeholder={t("email")}
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
                 />
               </div>
@@ -183,7 +185,7 @@ export default function Signup() {
             {/* Phone */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                {t('phoneNumber')}
+                {t("phoneNumber")}
               </label>
               <div className="relative">
                 <Phone className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
@@ -192,7 +194,7 @@ export default function Signup() {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  placeholder={t('phoneNumber')}
+                  placeholder={t("phoneNumber")}
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
                 />
               </div>
@@ -201,7 +203,7 @@ export default function Signup() {
             {/* Password */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                {t('password')}
+                {t("password")}
               </label>
               <div className="relative">
                 <Lock className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
@@ -210,7 +212,7 @@ export default function Signup() {
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
-                  placeholder={t('password')}
+                  placeholder={t("password")}
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
                 />
               </div>
@@ -219,7 +221,7 @@ export default function Signup() {
             {/* Confirm Password */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                {t('confirmPassword')}
+                {t("confirmPassword")}
               </label>
               <div className="relative">
                 <Lock className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
@@ -228,7 +230,7 @@ export default function Signup() {
                   name="confirmPassword"
                   value={formData.confirmPassword}
                   onChange={handleChange}
-                  placeholder={t('confirmPassword')}
+                  placeholder={t("confirmPassword")}
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
                 />
               </div>
@@ -237,7 +239,7 @@ export default function Signup() {
             {/* Ward Selection */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                {t('selectWard')}
+                {t("selectWard")}
               </label>
               <div className="relative">
                 <MapPin className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
@@ -247,7 +249,7 @@ export default function Signup() {
                   onChange={handleChange}
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
                 >
-                  <option value="">{t('selectWard')}</option>
+                  <option value="">{t("selectWard")}</option>
                   {bengaluruWards.map((ward) => (
                     <option key={ward.id} value={ward.id}>
                       {ward.name}
@@ -260,7 +262,7 @@ export default function Signup() {
             {/* Role Selection */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                {t('selectRole')}
+                {t("selectRole")}
               </label>
               <div className="flex gap-4">
                 <label className="flex items-center">
@@ -268,22 +270,22 @@ export default function Signup() {
                     type="radio"
                     name="role"
                     value="citizen"
-                    checked={formData.role === 'citizen'}
+                    checked={formData.role === "citizen"}
                     onChange={handleChange}
                     className="w-4 h-4"
                   />
-                  <span className="ml-2 text-gray-700">{t('citizen')}</span>
+                  <span className="ml-2 text-gray-700">{t("citizen")}</span>
                 </label>
                 <label className="flex items-center">
                   <input
                     type="radio"
                     name="role"
                     value="councillor"
-                    checked={formData.role === 'councillor'}
+                    checked={formData.role === "councillor"}
                     onChange={handleChange}
                     className="w-4 h-4"
                   />
-                  <span className="ml-2 text-gray-700">{t('councillor')}</span>
+                  <span className="ml-2 text-gray-700">{t("councillor")}</span>
                 </label>
               </div>
             </div>
@@ -294,23 +296,26 @@ export default function Signup() {
               disabled={loading}
               className="w-full bg-purple-600 text-white font-semibold py-2 rounded-lg hover:bg-purple-700 transition-colors disabled:opacity-50 mt-4"
             >
-              {loading ? t('loading') : t('signup')}
+              {loading ? t("loading") : t("signup")}
             </button>
           </form>
         </div>
 
         {/* Login Link */}
         <p className="text-center text-gray-600">
-          {t('alreadyHaveAccount')}{' '}
-          <Link to="/citizen-login" className="text-purple-600 font-semibold hover:underline">
-            {t('login')}
+          {t("alreadyHaveAccount")}{" "}
+          <Link
+            to="/citizen-login"
+            className="text-purple-600 font-semibold hover:underline"
+          >
+            {t("login")}
           </Link>
         </p>
 
         {/* Back to Home */}
         <p className="text-center mt-4">
           <Link to="/" className="text-gray-500 hover:text-gray-700 text-sm">
-            {t('back')} {t('homeTitle')}
+            {t("back")} {t("homeTitle")}
           </Link>
         </p>
       </div>

@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema, Document } from "mongoose";
 
 export interface IReport extends Document {
   userId: string;
@@ -9,7 +9,7 @@ export interface IReport extends Document {
   photoUrl: string;
   userName: string;
   userPhone: string;
-  status: 'pending' | 'verified' | 'resolved' | 'rejected';
+  status: "pending" | "verified" | "resolved" | "rejected";
   isVerified: boolean;
   isReal: boolean;
   verificationNotes: string;
@@ -36,13 +36,13 @@ const reportSchema = new Schema<IReport>(
       type: String,
       required: true,
       enum: [
-        'road-damage',
-        'water-problem',
-        'footpath',
-        'drainage',
-        'street-light',
-        'garbage',
-        'other',
+        "road-damage",
+        "water-problem",
+        "footpath",
+        "drainage",
+        "street-light",
+        "garbage",
+        "other",
       ],
     },
     description: {
@@ -63,8 +63,8 @@ const reportSchema = new Schema<IReport>(
     },
     status: {
       type: String,
-      enum: ['pending', 'verified', 'resolved', 'rejected'],
-      default: 'pending',
+      enum: ["pending", "verified", "resolved", "rejected"],
+      default: "pending",
     },
     isVerified: {
       type: Boolean,
@@ -76,7 +76,7 @@ const reportSchema = new Schema<IReport>(
     },
     verificationNotes: {
       type: String,
-      default: '',
+      default: "",
     },
     councillorId: {
       type: String,
@@ -85,7 +85,7 @@ const reportSchema = new Schema<IReport>(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 // Index for faster queries
@@ -93,4 +93,4 @@ reportSchema.index({ wardId: 1, status: 1 });
 reportSchema.index({ userId: 1 });
 reportSchema.index({ createdAt: -1 });
 
-export const Report = mongoose.model<IReport>('Report', reportSchema);
+export const Report = mongoose.model<IReport>("Report", reportSchema);

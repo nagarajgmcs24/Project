@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
-import { useLanguage } from '@/i18n/LanguageContext';
-import { MapPin, Upload, CheckCircle, Globe } from 'lucide-react';
+import { Link } from "react-router-dom";
+import { useLanguage } from "@/i18n/LanguageContext";
+import { MapPin, Upload, CheckCircle, Globe } from "lucide-react";
 
 export default function Home() {
   const { language, setLanguage, t } = useLanguage();
@@ -13,8 +13,10 @@ export default function Home() {
           <div className="flex items-center gap-2">
             <MapPin className="w-8 h-8 text-blue-600" />
             <div>
-              <h1 className="text-xl font-bold text-gray-800">{t('appName')}</h1>
-              <p className="text-xs text-gray-600">{t('appSubtitle')}</p>
+              <h1 className="text-xl font-bold text-gray-800">
+                {t("appName")}
+              </h1>
+              <p className="text-xs text-gray-600">{t("appSubtitle")}</p>
             </div>
           </div>
 
@@ -38,13 +40,13 @@ export default function Home() {
       <div className="pt-24 px-4 py-16 md:py-24 max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <div className="inline-block bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-semibold mb-4">
-            {t('appName')}
+            {t("appName")}
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            {t('homeSubtitle')}
+            {t("homeSubtitle")}
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
-            {t('homeDescription')}
+            {t("homeDescription")}
           </p>
 
           {/* Main CTA Buttons */}
@@ -53,21 +55,24 @@ export default function Home() {
               to="/citizen-login"
               className="px-8 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors inline-block"
             >
-              {t('citizenLogin')}
+              {t("citizenLogin")}
             </Link>
             <Link
               to="/councillor-login"
               className="px-8 py-3 bg-gray-200 text-gray-900 rounded-lg font-semibold hover:bg-gray-300 transition-colors inline-block"
             >
-              {t('councillorLogin')}
+              {t("councillorLogin")}
             </Link>
           </div>
 
           {/* Sub-links */}
           <p className="text-gray-600">
-            {t('dontHaveAccount')}{' '}
-            <Link to="/signup" className="text-blue-600 font-semibold hover:underline">
-              {t('signup')}
+            {t("dontHaveAccount")}{" "}
+            <Link
+              to="/signup"
+              className="text-blue-600 font-semibold hover:underline"
+            >
+              {t("signup")}
             </Link>
           </p>
         </div>
@@ -79,9 +84,12 @@ export default function Home() {
             <div className="bg-blue-100 w-14 h-14 rounded-lg flex items-center justify-center mb-4">
               <Upload className="w-7 h-7 text-blue-600" />
             </div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">{t('homeFeature1')}</h3>
+            <h3 className="text-xl font-bold text-gray-900 mb-2">
+              {t("homeFeature1")}
+            </h3>
             <p className="text-gray-600">
-              Upload photos of problems in your ward like broken roads, water issues, and footpaths.
+              Upload photos of problems in your ward like broken roads, water
+              issues, and footpaths.
             </p>
           </div>
 
@@ -90,9 +98,12 @@ export default function Home() {
             <div className="bg-green-100 w-14 h-14 rounded-lg flex items-center justify-center mb-4">
               <CheckCircle className="w-7 h-7 text-green-600" />
             </div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">{t('homeFeature2')}</h3>
+            <h3 className="text-xl font-bold text-gray-900 mb-2">
+              {t("homeFeature2")}
+            </h3>
             <p className="text-gray-600">
-              Our verification system checks and validates reports to prevent misuse and ensure authenticity.
+              Our verification system checks and validates reports to prevent
+              misuse and ensure authenticity.
             </p>
           </div>
 
@@ -101,9 +112,12 @@ export default function Home() {
             <div className="bg-purple-100 w-14 h-14 rounded-lg flex items-center justify-center mb-4">
               <MapPin className="w-7 h-7 text-purple-600" />
             </div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">{t('homeFeature3')}</h3>
+            <h3 className="text-xl font-bold text-gray-900 mb-2">
+              {t("homeFeature3")}
+            </h3>
             <p className="text-gray-600">
-              Track the status of your reports in real-time and see when your ward councillor resolves issues.
+              Track the status of your reports in real-time and see when your
+              ward councillor resolves issues.
             </p>
           </div>
         </div>
@@ -131,7 +145,10 @@ export default function Home() {
       {/* Footer */}
       <footer className="bg-gray-900 text-gray-300 py-8 mt-20">
         <div className="max-w-6xl mx-auto px-4 text-center">
-          <p>&copy; 2024 Fix My Ward - Community Problem Tracker. All rights reserved.</p>
+          <p>
+            &copy; 2024 Fix My Ward - Community Problem Tracker. All rights
+            reserved.
+          </p>
         </div>
       </footer>
     </div>

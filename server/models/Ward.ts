@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema, Document } from "mongoose";
 
 export interface IWard extends Document {
   name: string;
@@ -48,7 +48,7 @@ const wardSchema = new Schema<IWard>(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
-export const Ward = mongoose.model<IWard>('Ward', wardSchema);
+export const Ward = mongoose.model<IWard>("Ward", wardSchema);
