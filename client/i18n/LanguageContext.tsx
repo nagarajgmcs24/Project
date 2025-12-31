@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useState, ReactNode, useMemo } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useMemo,
+} from "react";
 import { Language, translations } from "./translations";
 
 interface LanguageContextType {
@@ -33,7 +39,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   const value = useMemo(
     () => ({ language, setLanguage: handleSetLanguage, t }),
-    [language]
+    [language],
   );
 
   return (
