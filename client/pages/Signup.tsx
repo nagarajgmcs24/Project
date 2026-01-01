@@ -64,7 +64,7 @@ export default function Signup() {
   setLoading(true);
   try {
     // Use backend URL from environment variable
-    const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+    const BASE_URL = import.meta.env.VITE_API_BASE_URLL;
 
     const response = await fetch(`${BASE_URL}/api/auth/signup`, {
       method: "POST",
