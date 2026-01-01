@@ -29,67 +29,72 @@ export default function Signup() {
   };
 
   const handleSubmit = async (e: any) => {
-    e.preventDefault();
-    setError("");
+  e.preventDefault();
+  setError("");
 
-    if (!formData.name) {
-      setError(t("enterUsername"));
-      return;
-    }
-    if (!formData.username) {
-      setError(t("enterUsername"));
-      return;
-    }
-    if (!formData.email) {
-      setError(t("enterEmail"));
-      return;
-    }
-    if (!formData.password) {
-      setError(t("enterPassword"));
-      return;
-    }
-    if (formData.password !== formData.confirmPassword) {
-      setError("Passwords do not match");
-      return;
-    }
-    if (!formData.phone) {
-      setError(t("phoneNumber"));
-      return;
-    }
-    if (!formData.ward) {
-      setError(t("selectAWard"));
-      return;
+  if (!formData.name) {
+    setError(t("enterUsername"));
+    return;
+  }
+  if (!formData.username) {
+    setError(t("enterUsername"));
+    return;
+  }
+  if (!formData.email) {
+    setError(t("enterEmail"));
+    return;
+  }
+  if (!formData.password) {
+    setError(t("enterPassword"));
+    return;
+  }
+  if (formData.password !== formData.confirmPassword) {
+    setError("Passwords do not match");
+    return;
+  }
+  if (!formData.phone) {
+    setError(t("phoneNumber"));
+    return;
+  }
+  if (!formData.ward) {
+    setError(t("selectAWard"));
+    return;
+  }
+
+  setLoading(true);
+  try {
+    // Use backend URL from environment variable
+    const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
+    const response = await fetch(`${BASE_URL}/api/auth/signup`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Signup failed");
     }
 
-    setLoading(true);
-    try {
-      const response = await fetch("/api/auth/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+    const data = await response.json();
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("userId", data.userId);
+    localStorage.setItem("role", formData.role);
+    localStorage.setItem("ward", formData.ward);
 
-      if (!response.ok) {
-        throw new Error("Signup failed");
-      }
-
-      const data = await response.json();
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("userId", data.userId);
-      localStorage.setItem("role", formData.role);
-      localStorage.setItem("ward", formData.ward);
-
-      if (formData.role === "citizen") {
-        navigate("/citizen-dashboard");
-      } else {
-        navigate("/councillor-dashboard");
-      }
-    } catch (err) {
-      setError("Signup failed. Please try again.");
-    } finally {
-      setLoading(false);
+    if (formData.role === "citizen") {
+      navigate("/citizen-dashboard");
+    } else {
+      navigate("/councillor-dashboard");
     }
-  };
+  } catch (err: any) {
+    setError(err.message || "Signup failed. Please try again.");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-purple-50 flex items-center justify-center px-4 py-8">
