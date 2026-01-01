@@ -7,3 +7,12 @@ if (!container) {
 }
 
 createRoot(container).render(<App />);
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
+fetch(`${BASE_URL}/api/signup`, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify(formData),
+});
